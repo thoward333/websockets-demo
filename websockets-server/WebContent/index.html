@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>WebSocket Demo</title>
+	</head>
+	
+	<body>
+		<form onsubmit="sendMessage(); return false;">
+			<p>
+				<input id="message" type="text" placeholder="Enter WebSocket message" style="width:400px" />
+			</p>
+			<p>
+				<input type="submit" value="Send Message" />
+				<input type="button" value="Close WebSocket" onclick="webSocket.close();" />
+			</p>
+		</form>
+		
+		<br/>
+		
+		<p>
+			<textarea id="reply" placeholder="WebSocket reply will appear hear" style="width:400px; height:300px;"></textarea>
+		</p>
+		
+		<script type="text/javascript">
+			var webSocket = new WebSocket('ws://localhost:8080/websockets-demo/mysocket');
+			var replyElem = document.getElementById('reply');
+			
+			webSocket.onopen = function(message) {
+				replyElem.value += "Opening connection...\n";
+			};
+			webSocket.onclose = function(message) {
+				replyElem.value += "Closing connection...\n";
+			};
+			webSocket.onmessage = function(message) {
+				replyElem.value += "Received message > " + message.data + "...\n";
+			}
+			webSocket.onerror = function(message) {
+				replyElem.value += "Processing error...\n";
+			};
+			
+			function sendMessage() {
+				var messageElem = document.getElementById('message');
+				webSocket.send(messageElem.value);
+				replyElem.value += "Sent message: " + messageElem.value + "\n";
+				messageElem.value = '';
+			}
+		</script>
+	</body>
+</html>
