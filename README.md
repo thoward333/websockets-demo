@@ -11,6 +11,7 @@ chat.html demonstrates a 1-to-many client/server relationship where each message
 
 ---------------
 websockets-client demonstrates a WebSockets client in J2SE by adding 2 libraries:
+
 1. javax.websocket-api-1.0.jar (http://mvnrepository.com/artifact/javax.websocket/javax.websocket-api)
 1. tyrus-standalone-client-1.7.jar (https://tyrus.java.net/dependencies.html)
 
